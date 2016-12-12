@@ -11,16 +11,20 @@ import numpy
 import cPickle
 import time
 import random
+import copy
+import chardet
 
 class FeatureGene:
 
 	# initialization, path is the news path
-	def __init__(self, path):
+	def __init__(self, path, encoding = 'utf-8'):
 		self.__path = path
 		# total number of files
 		self.__file_num = 0
 		# the file list
 		self.__files = None
+		# the encoding
+		self.__encoding = encoding
 
 		for prt, dirs, files in os.walk(self.__path):
 			print 'Handling all the files in ' + self.__path + '\n'
@@ -40,7 +44,12 @@ class FeatureGene:
 		2. Notice the encoding! My methods like 'utf-8' only
 		3. seg_list is a generator.
 		'''
-		seg_list = jieba.cut(content.decode('utf-8'), cut_all = True)
+		try:
+			seg_list = jieba.cut(content.decode(self.__encoding), cut_all = True)
+		except Exception as e:
+			print '\nfilename: ' + filename
+			print chardet.detect(content)
+			raise e
 		# the total words number in this file
 		words_num = 0
 		# store the result
@@ -113,14 +122,14 @@ class FeatureGene:
 	# calculate the cosine distance between two vectors
 	@classmethod
 	def CosDistance(clz_obj, vec1, vec2):
-		# make vector become 2-dimension matrix
-		vec1.shape = (1, vec1.size)
-		vec2.shape = (vec2.size, 1)
+		# make vectors become 2-dimension matrix
+		v1 = vec1.reshape((1, vec1.size))
+		v2 = vec2.reshape((vec2.size, 1))
 
 		# calculate the matrix dot product
-		num = numpy.dot(vec1, vec2)[0][0]
+		num = numpy.dot(v1, v2)[0][0]
 		# calculate the matrix's norm
-		denom = numpy.linalg.norm(vec1) * numpy.linalg.norm(vec2)
+		denom = numpy.linalg.norm(v1) * numpy.linalg.norm(v2)
 		# cosine
 		cos = num / denom
 
@@ -189,15 +198,15 @@ if __name__ == '__main__':
 	IDF = cPickle.load(ipt)
 	ipt.close()
 
-	# start = time.clock()
-	# vec1 = fg.TFIDF2vec('2016-11-28-100002', IDF)
-	# vec2 = fg.TFIDF2vec('2016-11-28-100122', IDF)
+	start = time.clock()
+	vec1 = fg.TFIDF2vec('2016-11-28-100002', IDF)
+	vec2 = fg.TFIDF2vec('2016-11-28-100122', IDF)
 	
-	'''print FeatureGene.CosDistance(vec1, vec2)
+	print FeatureGene.CosDistance(vec1, vec2)
 	print FeatureGene.EucDistance(vec1, vec2)
 	end = time.clock()
-	print 'read: %f' % (end - start)'''
+	print 'read: %f' % (end - start)
 
-	lst = fg.FindSimFiles('2016-11-28-100002', 0.7, fg.CosDistance)
+	'''lst = fg.FindSimFiles('2016-11-28-100002', 0.7, fg.CosDistance)
 	for file in lst:
-		print file
+		print file'''
