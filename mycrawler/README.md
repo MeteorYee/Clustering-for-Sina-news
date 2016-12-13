@@ -42,6 +42,6 @@ To get the first web page, after that, a new openUrls will be generated.
 * _ReadnPage(n)_<br>
 Tell the crawler to get n pages.
 * _GoOnReadnPage(n)_<br>
-The network condition can be varied, and the method ReadnPage(n) will not always get number of pages you want, because, for example, we meet a **TIMEOUT**. Hence, this method will make crawler recover and go on to read n pages. All its need is that there **must** be **the three urls lists** in current path.
+The network conditions can be varied, and the method ReadnPage(n) will not always get the number of pages you want, because, for example, we meet a **TIMEOUT**. Hence, this method will make crawler recover and go on to read n pages. All its need is that there **must** be **the three urls lists** in current path.
 * _Others_<br>
 the rest of methods are used for loading and storing, or some private methods.
