@@ -6,7 +6,7 @@ Take advantage of K-means algorithm
 
 <p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/K-means-precision.png" /></p>
 
-* I also uploaded my testing data and results details, if anyone wants, which are in the files: _**test_corpus_Fudan.zip, BTreport-K10**_, respectively.
+* I also uploaded my testing data and results details, if anyone wants, which are in the files: _**test_corpus_Fudan.zip, BTreport-K10**_, respectively. By the way, GB18030, according to my trials, is the most suitable encoding for this data set.
 
 ## Introduction
 There are 3 parts in my small system, a **web spider** for Sina news, a **vector-calculating** module and **K-means** algorithm. In this README file, I will just try to introduce the implementation about my K-means algorithm thoroughly. You may see the other two parts in the following two README files:<br>
