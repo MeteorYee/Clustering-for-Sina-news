@@ -6,12 +6,12 @@ Based on BFS algorithm
 * the source codes
 
 ### PageID
-* This file **MUST** be exist when the crawler starts to run, which is used to generate **an unique ID** for each downloaded file. You may also revise the content in this file. In fact, it is just an Integer object stored by Cpickle.dump(). I set 100,000 the maximum number of page ID in my code (at line: 168, its initial value is 100,000).
+* This file **MUST** exist when the crawler starts to run, which is used to generate **an unique ID** for each downloaded file. You may also revise the content in this file. In fact, it is just an Integer object stored by Cpickle.dump(). I set 100,000 the maximum number of page ID in my code (at line: 168, its initial value is 100,000).
 
 ### Url lists
 * In order to implement BFS algorithm, I used **3 lists** to store website's urls.
   * _**OpenUrls**_ is the current urls list. Every url in this list is going to be downloaded soon.
-  * _**ReadyUrls**_ is the new urls list. Urls in this list are extracted from the urls in openUrls. Namely, readyUrls is the next-time openUrls.
+  * _**ReadyUrls**_ is the new urls list. Urls in this list are extracted from the contents of the urls in openUrls. Namely, readyUrls is the next-time openUrls.
   * _**CloseUrls**_ stores the urls which have been downloaded. The meaning of its existence is to ensure that crawler won't get a web page twice.
 
 ### pagelog.txt
