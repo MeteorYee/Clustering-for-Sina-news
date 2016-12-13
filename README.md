@@ -12,4 +12,5 @@ Take advantage of K-means algorithm
 There are 3 parts in my small system, a **web spider** for Sina news, a **vector-calculating** module and **K-means** algorithm. In this README file, I will just try to introduce the implementation about my K-means algorithm thoroughly. You may see the other two parts in the following two README files:<br>
 * [README](https://github.com/MeteorYee/Clustering-for-Sina-news/tree/master/mycrawler) for spider
 * [README](https://github.com/MeteorYee/Clustering-for-Sina-news/tree/master/feature_extraction) for feature extraction
+
 to be continued...
