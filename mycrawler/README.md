@@ -11,7 +11,7 @@ Based on BFS algorithm
 ### Url lists
 * In order to implement BFS algorithm, I used **3 lists** to store website's urls.
   * _**OpenUrls**_ is the current urls list. Every url in this list is going to be downloaded soon.
-  * _**ReadyUrls**_ is the new urls list. Urls in this list are extracted from the contents of the urls in openUrls. Namely, readyUrls is the next-time openUrls.
+  * _**ReadyUrls**_ is the new urls list. Urls in this list are extracted from the contents of the urls in openUrls. Namely, readyUrls is the next-time openUrls.
   * _**CloseUrls**_ stores the urls which have been downloaded. The meaning of its existence is to ensure that crawler won't get a web page twice.
 
 ### pagelog.txt
