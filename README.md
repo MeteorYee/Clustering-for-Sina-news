@@ -27,12 +27,21 @@ Every node in the ball tree is a hyper-sphere, and the minimum number of points 
 
 ## Usage
 ### File-Name-Based
+class **KmeansCluster**:<br>
+* _**init(self, Kvalue, path)**_<br>
+KValue: K value of K-means, path: the corpus path
+* _**Train(self, it_num, func)**_<br>
+it_num: iteration number, func: the distance-calculating function
+* _**Report(self):**_<br>
+report the result, see file: _report-K10_
+* _**Evaluate(self, func)**_<br>
+evaluate the result based on the given function
 
 ### Vector-Based (with Ball Tree)
 class **BTKmeansCluster**:<br>
- * ___init__(self, Kvalue, path, node=10, func)_<br>
- KValue: 
-* _Train(self, it_num=5, balltree=False)_<br>
-it\_num: iteration number, balltree: whether use ball tree
-* _Report(self)_:<br>
+* _**init(self, Kvalue, path, node=10, func)**_<br>
+KValue: K value of K-means, path: the corpus path, node: the minimum number of points in leaf node, func: the distance-calculating function
+* _**Train(self, it_num=5, balltree=False)**_<br>
+it_num: iteration number, balltree: whether use ball tree
+* _**Report(self):**_<br>
 report the result, see file: _BTreport-K10_
