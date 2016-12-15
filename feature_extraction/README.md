@@ -23,10 +23,10 @@ return all the files, a list object
 * _**GetDictFiles(self)**_<br>
 get all files, a dict object, all values are set by 0
 
-* _**CosDistance(vec1, vec2)**_<br>
+* _**CosDistance(vec1, vec2)**_ class method<br>
 calculate the cosine distance between two vectors
 
-* _**EucDistance(clz_obj, vec1, vec2)**_<br>
+* _**EucDistance(clz_obj, vec1, vec2)**_ class method<br>
 calculate the Euclidean distance between two vectors
 
 * _**FindSimFiles(self, myfile, level, func)**_<br>
