@@ -8,6 +8,9 @@ and some necessary methods
 * Distance Calculation: **Euclidean Distance and Cosine Distance**
 
 ## Methods
+* _**FeatureGene(path, encoding)**_<br>
+path: the corpus path, encoding: set the encoding of input content
+
 * _**GeneInvDocFreq()**_<br>
 Generate IDF file, used to calculate TF-IDF value
 
@@ -21,7 +24,7 @@ return n file's vectors randomly
 return all the files, a list object
 
 * _**GetDictFiles(self)**_<br>
-get all files, a dict object, all values are set by 0
+get all the files, a dict object, all values are set by 0
 
 * _**CosDistance(vec1, vec2)**_ class method<br>
 calculate the cosine distance between two vectors
