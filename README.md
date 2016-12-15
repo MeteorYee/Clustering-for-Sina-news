@@ -26,3 +26,13 @@ Every node in the ball tree is a hyper-sphere, and the minimum number of points 
 * The hit rate of this ball tree is really low, which means with ball tree is equal to without.
 
 ## Usage
+### File-Name-Based
+
+### Vector-Based (with Ball Tree)
+class **BTKmeansCluster**:<br>
+ * ___init__(self, Kvalue, path, node=10, func)_
+ KValue: 
+* _Train(self, it_num=5, balltree=False)_
+it_num: iteration number, balltree: whether use ball tree
+* _Report(self)_:
+report the result, see file: _BTreport-K10_
