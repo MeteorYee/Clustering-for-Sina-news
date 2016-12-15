@@ -30,9 +30,9 @@ Every node in the ball tree is a hyper-sphere, and the minimum number of points 
 
 ### Vector-Based (with Ball Tree)
 class **BTKmeansCluster**:<br>
- * ___init__(self, Kvalue, path, node=10, func)_
+ * ___init__(self, Kvalue, path, node=10, func)_<br>
  KValue: 
-* _Train(self, it_num=5, balltree=False)_
-it_num: iteration number, balltree: whether use ball tree
-* _Report(self)_:
+* _Train(self, it_num=5, balltree=False)_<br>
+it\_num: iteration number, balltree: whether use ball tree
+* _Report(self)_:<br>
 report the result, see file: _BTreport-K10_
