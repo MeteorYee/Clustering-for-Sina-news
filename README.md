@@ -16,9 +16,9 @@ There are 3 parts in my small system, a **web crawler** for Sina news, a **vecto
 ## Implementation
 THREE ways: **file-name-based, vector-based, vector-based with ball tree**
 ### File-Name-Based
-Every 'point' is 'space' is a file name. When calculating the distance between two points, files' corresponding vectors should be generated at first. Hence, the iteration time may be slow but it will save a lot of time. For example, 3000 points in an 87827-dimension space will cost only **120MB** memoriy and use nearly **21s** in each iteration if using this method, whereas vector-based method will cost **860MB** memory and use only **9s**.
+Every 'point' is 'space' is a file name. When calculating the distance between two points, files' corresponding vectors should be generated at first. Hence, the iteration may be slow but it will save a lot of memory. For example, 3000 points in an 87827-dimension space will cost only **120MB** memory and use nearly **21s** in each iteration when using this method, whereas vector-based method will cost nearly **860MB** memory and use only **9s**.
 ### Vector-Based
-More memory and less time
+More memory and less time. The point is vector.
 ### Vector-Based with ball tree
 Reference: http://blog.csdn.net/skyline0623/article/details/8154911<br><br>
 Every node in the ball tree is a hyper-sphere, and the minimum number of points in leaf node can be determined by parameter transfering. Unfortunately, this method is not very mature now, and I am _**still working on it**_ because of the two defects below.
@@ -35,13 +35,13 @@ it_num: iteration number, func: the distance-calculating function
 * _**Report(self):**_<br>
 report the result, see file: _report-K10_
 * _**Evaluate(self, func)**_<br>
-evaluate the result based on the given function
+evaluate the result based on the given function, see file: _evaluation-K10_
 
 ### Vector-Based (with Ball Tree)
 class **BTKmeansCluster**:<br>
 * _**init(self, Kvalue, path, node=10, func)**_<br>
 KValue: K value of K-means, path: the corpus path, node: the minimum number of points in leaf node, func: the distance-calculating function
 * _**Train(self, it_num=5, balltree=False)**_<br>
-it_num: iteration number, balltree: whether use ball tree
+it_num: iteration number, balltree = True/False: to use ball tree or not
 * _**Report(self):**_<br>
 report the result, see file: _BTreport-K10_
