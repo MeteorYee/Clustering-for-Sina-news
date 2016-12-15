@@ -13,4 +13,16 @@ There are 3 parts in my small system, a **web crawler** for Sina news, a **vecto
 * [README](https://github.com/MeteorYee/Clustering-for-Sina-news/tree/master/mycrawler) for crawler
 * [README](https://github.com/MeteorYee/Clustering-for-Sina-news/tree/master/feature_extraction) for feature extraction
 
-to be continued...
+## Implementation
+THREE ways: **file-name-based, vector-based, vector-based with ball tree**
+### File-Name-Based
+Every 'point' is 'space' is a file name. When calculating the distance between two points, files' corresponding vectors should be generated at first. Hence, the iteration time may be slow but it will save a lot of time. For example, 3000 points in an 87827-dimension space will cost only **120MB** memoriy and use nearly **21s** in each iteration if using this method, whereas vector-based method will cost **860MB** memory and use only **9s**.
+### Vector-Based
+More memory and less time
+### Vector-Based with ball tree
+Reference: http://blog.csdn.net/skyline0623/article/details/8154911<br><br>
+Every node in the ball tree is a hyper-sphere, and the minimum number of points in leaf node can be determined by parameter transfering. Unfortunately, this method is not very mature now, and I am _**still working on it**_ because of the two defects below.
+* The time of ball tree building is too long. 3000 87827-dimension vectors need 30 more seconds to build, when the minimum number of points in a leaf is 20.
+* The hit rate of this ball tree is really low, which means with ball tree is equal to without.
+
+## Usage
