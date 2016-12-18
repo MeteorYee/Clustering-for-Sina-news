@@ -10,12 +10,12 @@ import cPickle
 import time
 import BallTree
 import copy
-import random
+import pdb
 
 class BTKmeansCluster:
 
 	# initialization
-	def __init__(self, Kvalue, path, node = 10, func = fg.FeatureGene.CosDistance):
+	def __init__(self, Kvalue, path, node = 10, func = fg.FeatureGene.EucDistance, encoding = 'utf-8'):
 		# K-means' K
 		self.__KValue = Kvalue
 		# the minimum number of nodes in a ball tree's leaf
@@ -23,7 +23,7 @@ class BTKmeansCluster:
 		# the distance-calculating fuction
 		self.__func = func
 
-		self.__FG = fg.FeatureGene(path, encoding = 'GB18030')
+		self.__FG = fg.FeatureGene(path, encoding = encoding)
 		try:
 			ipt = open('IDF_file', 'r')
 		except:
@@ -67,26 +67,15 @@ class BTKmeansCluster:
 		print 'start building ball tree...'
 		start = time.clock()
 
-		r = random.randint(0, len(self.__vectors) - 1)
-		# generate center randomly
-		center = self.__vectors[r]
+		# get the center of an area
+		center = sum(self.__vectors)
+		center /= len(self.__vectors)
 		# ball tree's root
 		self.__BTroot = BallTree.BallTreeNode(center = center, radius = float('inf'))
-		BallTree.GetBallTree(self.__vectors, center, self.__BTroot, self.__node, self.__Distance)
+		BallTree.GetBallTree(self.__vectors, center, self.__BTroot, self.__node, self.__func)
 
 		end = time.clock()
 		print 'spent: %fs' % (end - start)
-
-	# the distance
-	def __Distance(self, vec1, vec2):
-		# to see if they are the same vector
-		if id(vec1) == id(vec2):
-			dist = 0.0
-		else:
-			dist = self.__func(vec1, vec2)
-			dist = 1.0 / dist
-
-		return dist
 
 	'''
 	get the nearest center, based on the distance-calculating function
@@ -98,7 +87,7 @@ class BTKmeansCluster:
 		i = 0
 
 		for vec in self.__Kvecs:
-			dist = self.__Distance(myvec, vec)
+			dist = self.__func(myvec, vec)
 			if dist < distance:
 				distance = dist
 				center_num = i
@@ -120,15 +109,22 @@ class BTKmeansCluster:
 	'''
 	def __PickOffLeaf(self, leaf, CN = 0):
 		self.__total += 1
-		for vec in leaf.area:
-			if CN == 0:
-				self.__miss += 1
+
+		if CN == 0:
+			self.__miss += 1
+			for vec in leaf.area:
 				CN = self.__FindNearestCenter(vec)
 
-			if self.__categories.has_key(CN):
-				self.__categories[CN].append(vec)
-			else:
-				self.__categories[CN] = [vec, ]
+				if self.__categories.has_key(CN):
+					self.__categories[CN].append(vec)
+				else:
+					self.__categories[CN] = [vec, ]
+		else:
+			for vec in leaf.area:
+				if self.__categories.has_key(CN):
+					self.__categories[CN].append(vec)
+				else:
+					self.__categories[CN] = [vec, ]
 
 	''' 
 	Make all the vectors in a particular area become category CN, as we know, the area 
@@ -147,9 +143,10 @@ class BTKmeansCluster:
 		# the list for distances of current center away from K clustering center
 		Dlist = []
 		for cvec in self.__Kvecs:
-			Dlist.append(self.__Distance(btnode.center, cvec))
+			Dlist.append(self.__func(btnode.center, cvec))
 
 		lst = sorted(Dlist)
+		# pdb.set_trace()
 		'''
 		When this list is sorted (ascending order), the 1st least one and the 2nd least
 		one are lst[0], lst[1] respectively. 
@@ -179,7 +176,6 @@ class BTKmeansCluster:
 	# iteration
 	def __Iteration(self, balltree):
 		if balltree:
-			CN = random.randint(1, len(self.__Kvecs))
 			self.__BTsearch(self.__BTroot)
 
 			print 'miss: %d' % self.__miss
@@ -205,13 +201,13 @@ class BTKmeansCluster:
 		for Nvec in self.__Newvecs:
 			total_num = len(self.__categories[CN])
 			Nvec /= total_num
-			distance = self.__Distance(Nvec, self.__Kvecs[CN - 1])
+			distance = self.__func(Nvec, self.__Kvecs[CN - 1])
 
 			if distance == 1.0:
 				cnt += 1
 
 			print 'Category ' + str(CN) + ':',
-			print 'distance: ' + str(distance) + ',',
+			print 'Distance: ' + str(distance) + ',',
 			print 'vector number: ' + str(total_num)
 
 			self.__Kvecs[CN - 1] = Nvec
@@ -233,19 +229,20 @@ class BTKmeansCluster:
 			if self.__Update() >= self.__KValue:
 				end = time.clock()
 				print 'spent: %fs' % (end - start)
-				print 'mission completed'
 				break
 
 			if i < it_num:
 				self.__Newvecs = [[]] * self.__KValue
 				self.__categories = {}
+
 			end = time.clock()
 			print 'spent: %fs' % (end - start)
-			print 'mission completed'
+
+		print 'mission completed'
 
 	# report the result
 	def Report(self):
-		filename = 'BTreport-K' + str(self.__KValue)
+		filename = self.__func.__name__ + '-BTreport-K' + str(self.__KValue)
 		with open(filename, 'w') as opt:
 			for CN in self.__categories:
 				for vec in self.__categories[CN]:
@@ -256,8 +253,8 @@ class BTKmeansCluster:
 
 if __name__ == '__main__':
 	# the news' path
-	path = '/home/meteor/data/Fudan/'
-	# path = '/home/meteor/data/sinanews/'
-	btkc = BTKmeansCluster(Kvalue = 10, path = path, node = 15)
-	btkc.Train(it_num = 5, balltree = True)
+	# path = '/home/meteor/data/Fudan/'
+	path = '/home/meteor/data/sinanews/'
+	btkc = BTKmeansCluster(Kvalue = 10, path = path, node = 10, encoding = 'utf-8')
+	btkc.Train(it_num = 5, balltree = False)
 	# btkc.Report()
