@@ -8,6 +8,7 @@
 import os
 import jieba
 import numpy
+import math
 import cPickle
 import time
 import random
@@ -104,7 +105,6 @@ class FeatureGene:
 	# and make it to be vector
 	def TFIDF2vec(self, file, IDF):
 		TF, words_num = self.__TermFreq(file)
-		l = []
 		# create vector
 		vector = numpy.zeros((len(IDF), ))
 
@@ -132,17 +132,22 @@ class FeatureGene:
 		denom = numpy.linalg.norm(v1) * numpy.linalg.norm(v2)
 		# cosine
 		cos = num / denom
+		result = 0.0
+		if cos >= 1:
+			result = 0.0
+		elif cos <= -1:
+			result = 2 * math.pi
+		else:
+			result = math.acos(cos)
 
-		# normalization
-		return (cos * 0.5 + 0.5)
+		return result
 
 	# calculate the Euclidean distance between two vectors
 	@classmethod
 	def EucDistance(clz_obj, vec1, vec2):
 		edist = numpy.linalg.norm(vec1 - vec2)
 
-		# normalization
-		return 1.0 / (edist + 1.0)
+		return edist
 
 	# find all the simiar files according to the given level
 	# calculate the distance based on the given function
@@ -200,7 +205,7 @@ if __name__ == '__main__':
 
 	start = time.clock()
 	vec1 = fg.TFIDF2vec('2016-11-28-100002', IDF)
-	vec2 = fg.TFIDF2vec('2016-11-28-100122', IDF)
+	vec2 = fg.TFIDF2vec('2016-11-28-100001', IDF)
 	
 	print FeatureGene.CosDistance(vec1, vec2)
 	print FeatureGene.EucDistance(vec1, vec2)
