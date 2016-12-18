@@ -9,7 +9,7 @@ Taking advantage of K-means algorithm
 
 * I also uploaded my testing data and results details, if anyone wants, which are in the files: _**test_corpus_Fudan.zip, BTreport-K10**_, respectively. By the way, GB18030, according to my trials, is the most suitable encoding for this data set.
 
-### A More Strong Evaluation
+### A Stronger Evaluation
 The precision above is calculated by myself. Afterwords, I realized that it could not evaluate a clustering effectively. Hence, I found [THIS](http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html), which is from the book: _Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, **Introduction to Information Retrieval**, Cambridge University Press. 2008._ The results are below: (the source codes of evaluation is in the file [evaluate.py](https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/evaluate.py))
 * For clustering calculated by **cosine distance**<br>
 <p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Cos-BTK-10.png" /></p>
@@ -29,9 +29,9 @@ Every 'point' is 'space' is a file name. When calculating the distance between t
 More memory and less time. The point is vector.
 ### Vector-Based with ball tree
 Reference: http://blog.csdn.net/skyline0623/article/details/8154911<br><br>
-Every node in the ball tree is a hyper-sphere, and the minimum number of points in leaf node can be determined by parameter transfering. Unfortunately, this method is not very mature now, and I am _**still working on it**_ because of the two defects below.
-* The time of ball tree building is too long. 3000 87827-dimension vectors need 30 more seconds to build, when the minimum number of points in a leaf is 20.
-* The hit rate of this ball tree is really low, which means with ball tree is equal to without.
+Every node in the ball tree is a hyper-sphere, and the minimum number of points in leaf node can be determined by parameter transfering. However, this method is not very mature now.
+* The time of ball tree building is too long. 3000 _87827-dimension vectors_ need 30 more seconds to build, when the minimum number of points in a leaf is 20.
+* As for distance calculated by cosine, the hit rate of this ball tree is really low (just 1%), which means with ball tree is equal to without. Instead, as for Euclidean dsitance, the hit rate reaches 30% when minimum node number is 20.
 
 ## Usage
 ### File-Name-Based
