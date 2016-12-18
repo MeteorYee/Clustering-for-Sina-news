@@ -12,9 +12,9 @@ Taking advantage of K-means algorithm
 ### A More Strong Evaluation
 The precision above is calculated by myself. Afterwords, I realized that it could not evaluate a clustering effectively. Hence, I found [THIS](http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html), which is from the book: _Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, **Introduction to Information Retrieval**, Cambridge University Press. 2008._ The results are below:
 * For clustering calculated by **cosine distance**<br>
-<p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Cos-BTK10.png" /></p>
+<p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Cos-BTK-10.png" /></p>
 * For clustering calculated by **Euclidean distance**<br>
-<p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Euc-BTK10.png" /></p>
+<p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Euc-BTK-10.png" /></p>
 
 ## Introduction
 There are 3 parts in my small system, a **web crawler** for Sina news, a **vector-calculating** module and **K-means** algorithm. In this README file, I will just try to introduce the implementation about my K-means algorithm thoroughly. You may see the other two parts in the following two README files:<br>
