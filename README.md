@@ -10,7 +10,7 @@ Taking advantage of K-means algorithm
 * I also uploaded my testing data and results details, if anyone wants, which are in the files: _**test_corpus_Fudan.zip, BTreport-K10**_, respectively. By the way, GB18030, according to my trials, is the most suitable encoding for this data set.
 
 ### A More Strong Evaluation
-The precision above is calculated by myself. Afterwords, I realized that it could not evaluate a clustering effectively. Hence, I found [THIS](http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html), which is from the book: _Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, **Introduction to Information Retrieval**, Cambridge University Press. 2008._ The results are below:
+The precision above is calculated by myself. Afterwords, I realized that it could not evaluate a clustering effectively. Hence, I found [THIS](http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html), which is from the book: _Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, **Introduction to Information Retrieval**, Cambridge University Press. 2008._ The results are below: (the source codes of evaluation is in the file [evaluate.py](https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/evaluate.py))
 * For clustering calculated by **cosine distance**<br>
 <p align="center"><img src="https://github.com/MeteorYee/Clustering-for-Sina-news/blob/master/images/Cos-BTK-10.png" /></p>
 * For clustering calculated by **Euclidean distance**<br>
