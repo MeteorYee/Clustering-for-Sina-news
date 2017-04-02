@@ -28,7 +28,7 @@ THREE ways: **file-name-based, vector-based, vector-based with ball tree**
 Every 'point' is 'space' is a file name. When calculating the distance between two points, files' corresponding vectors should be generated at first. Hence, the iteration may be slow but it will save a lot of memory. For example, 3000 points in an 87827-dimension space will cost only **120MB** memory and use nearly **21s** in each iteration when using this method, whereas vector-based method will cost nearly **860MB** memory and use only **9s**.
 ### Vector-Based
 More memory and less time. The point is vector.
-> The vector is one-hot representation. What a stupid way here! I never tired **word2vec**, or some storage methods for these **sparse matrice**. 
+> The vector is one-hot representation. What a stupid way here! I never tired **word2vec**, or some storage methods for these **sparse matrices**. 
 ### Vector-Based with ball tree
 Reference: http://blog.csdn.net/skyline0623/article/details/8154911<br><br>
 Every node in the ball tree is a hyper-sphere, and the minimum number of points in leaf node can be determined by parameter transfering. However, this method is **not very mature** now.
